@@ -429,7 +429,7 @@ document.getElementById('btn-hapus-riwayat').addEventListener('click', () => {
 });
 
 // ===================== MOBILE KERANJANG TOGGLE =====================
-function isMobile() { return window.innerWidth <= 480; }
+function isMobile() { return window.innerWidth <= 600; }
 
 function updateKeranjangFab() {
   const total = keranjang.reduce((s, k) => s + k.qty, 0);
@@ -443,6 +443,7 @@ function updateKeranjangFab() {
   } else {
     fab.style.display = 'none';
     toggleBtn.style.display = 'none';
+    document.getElementById('keranjang-panel').classList.remove('open');
   }
 }
 
@@ -454,12 +455,7 @@ document.getElementById('btn-toggle-keranjang').addEventListener('click', () => 
   document.getElementById('keranjang-panel').classList.remove('open');
 });
 
-window.addEventListener('resize', () => {
-  updateKeranjangFab();
-  if (!isMobile()) {
-    document.getElementById('keranjang-panel').classList.remove('open');
-  }
-});
+window.addEventListener('resize', updateKeranjangFab);
 
 // ===================== INIT =====================
 renderKategoriTabs();
